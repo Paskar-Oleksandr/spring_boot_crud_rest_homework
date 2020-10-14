@@ -10,7 +10,7 @@ public class UserService {
 
     private static final Map<Long, User> userMap = new HashMap<>();
 
-    {
+    static {
         User user1 = new User(1L, "Ivan", "Ivanov");
         User user2 = new User(2L, "Petro", "Petrov");
         User user3 = new User(3L, "Ilona", "Igorova");
@@ -29,19 +29,18 @@ public class UserService {
         return user;
     }
 
-    public User updateUser(User user) {
+    public void updateUser(User user) {
         userMap.put(user.getId(), user);
-        return user;
     }
 
-    public void deleteUserById(Long id) {
+    public boolean deleteUserById(Long id) {
         userMap.remove(id);
+        return userMap.containsKey(id);
     }
 
     public List<User> getAllUsers() {
         Collection<User> c = userMap.values();
-        List<User> list = new ArrayList<>(c);
-        return list;
+        return new ArrayList<>(c);
     }
 
 }
